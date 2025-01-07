@@ -12,8 +12,7 @@ const Home = () => {
   const [aiName, setAiName] = useState("");
   const [firstTime, setFirstTime] = useState(true);
   const [isListening, setIsListening] = useState(false);
-  const commandRef = useRef<string>('');
-
+  const commandRef = useRef<string>("");
 
   useEffect(() => {
     if (window) {
@@ -53,18 +52,18 @@ const Home = () => {
 
   const handleStartListening = () => {
     if ("webkitSpeechRecognition" in window) {
-      const recognition = new (window.webkitSpeechRecognition)();
+      const recognition = new window.webkitSpeechRecognition();
       recognition.lang = "en-US"; // Set the language
-      recognition.interimResults = true //Capture only final results
-      recognition.continuous = false; 
+      recognition.interimResults = true; //Capture only final results
+      recognition.continuous = false;
       recognition.onstart = () => {
         setIsListening(true);
         console.log("Voice recognition started...");
       };
-  
+
       recognition.onresult = (event: any) => {
-        let transcript = '';
-    
+        let transcript = "";
+
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const result = event.results[i];
           if (result.isFinal) {
@@ -75,18 +74,18 @@ const Home = () => {
             transcript += result[0].transcript;
           }
         }
-  
+
         // Update the form with the current transcript
         commandRef.current = transcript;
-        setCommand(transcript)
+        setCommand(transcript);
         console.log("Voice detected:", transcript);
       };
-  
+
       recognition.onerror = (error: any) => {
         console.error("Speech recognition error:", error);
         setIsListening(false);
       };
-  
+
       recognition.onend = () => {
         setIsListening(false);
         fetchResponse({
@@ -96,15 +95,13 @@ const Home = () => {
         });
         console.log("Voice recognition ended.");
       };
-  
+
       recognition.start();
     } else {
       console.error("SpeechRecognition is not supported in this browser.");
     }
   };
-  
-  
-  
+
   // Function to speak the response text
   const speakResponse = (text: string) => {
     if ("speechSynthesis" in window) {
@@ -146,16 +143,16 @@ const Home = () => {
   }, [response]);
 
   return (
-    <div className="grainy-background h-screen flex flex-col text-white overflow-hidden">
+    <div className="grainy-background min-h-screen flex flex-col text-white">
       <div className="header p-[40px] flex items-center justify-between">
-        <h1 className="text-4xl">Buddy.ai</h1>
+        <h1 className="text-4xl">BrainBuddy</h1>
         <div className="flex gap-4">
           <h6>Twitter</h6>
           <h6>Telegram</h6>
           <h6>Dex Screener</h6>
         </div>
       </div>
-      <div className="grow flex flex-col justify-center items-center">
+      <div className="home grow flex flex-col justify-center items-center">
         <Image
           className="absolute blur-[180px] bottom-[-93px] left-[14px]"
           src="/blur-circle.png"
@@ -170,7 +167,6 @@ const Home = () => {
           width={80}
           height={80}
         />
-
         <h2 className="text-8xl font-bold text-white text-center">
           <ReactTyped strings={[answer]} typeSpeed={50} startDelay={1000} />
         </h2>
@@ -204,25 +200,42 @@ const Home = () => {
                 Submit
                 <Image src="/left-arrow.png" alt="" width={32} height={32} />
               </button>
-              {
-                !firstTime && (
-                  <button
+              {!firstTime && (
+                <button
                   type="button"
                   className="px-4 py-3 bg-black text-white rounded-full flex gap-2 items-center justify-between"
                   onClick={handleStartListening}
                   disabled={loading}
-                > 
-                  {
-                    isListening
-                    ? `${aiName} Listening`
-                    : 'Start Talking'
-                  }
+                >
+                  {isListening ? `${aiName} Listening` : "Start Talking"}
                 </button>
-                )
-              }
+              )}
             </div>
           </div>
         </form>
+      </div>
+      <div className="about flex flex-col justify-center items-center">
+        <h1 className="highlighted-text-shadow">Who is BrainBuddy?</h1>
+        <div className="about-container">
+          <div className="about-text">
+            <div className="card3">
+              $BB is an AI Personal Assistant of the future. It’s more than just
+              a tool—it’s your digital companion, always ready to help you with
+              anything you need. From answering questions to managing tasks,
+              BrainBuddy is designed to think, adapt, and grow with you. With
+              BrainBuddy, the possibilities are endless. Customize its
+              personality, voice, and tone to create an assistant that feels
+              like a true reflection of you. As you interact, BrainBuddy learns
+              and evolves, becoming smarter and more intuitive with every
+              conversation. It’s not just about getting things done—it’s about
+              experiencing a seamless, intelligent connection that understands
+              you like no other. With BrainBuddy, the future of AI is here, and
+              it’s personal, smart, and always by your side.
+            </div>
+          </div>
+        </div>
+        <div className="ca-address">
+        </div>
       </div>
     </div>
   );
