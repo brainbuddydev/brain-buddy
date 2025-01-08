@@ -235,6 +235,9 @@ const Home = () => {
           </div>
         </div>
         <div className="ca-address">
+          <button className="shiny-cta">
+            <span>CA : 9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump</span>
+          </button>
         </div>
       </div>
     </div>
