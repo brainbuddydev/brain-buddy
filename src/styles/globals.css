@@ -189,10 +189,10 @@ h1 {
 
 :root {
   --shiny-cta-bg: #050505;
-  --shiny-cta-bg-subtle: #1a1818;
+  --shiny-cta-bg-subtle: #293B43;
   --shiny-cta-fg: #ffffff;
-  --shiny-cta-highlight: rgb(141, 105, 148);
-  --shiny-cta-highlight-subtle: #8484ff;
+  --shiny-cta-highlight: #438985;
+  --shiny-cta-highlight-subtle: #325B5D;
 }
 
 @property --gradient-angle {

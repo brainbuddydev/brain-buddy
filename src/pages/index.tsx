@@ -296,7 +296,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="ca-address">
+          <div className="ca-address mb-[100px]">
             <button className="shiny-cta">
               <span>CA : 9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump</span>
             </button>
