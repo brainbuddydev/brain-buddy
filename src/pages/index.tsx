@@ -154,20 +154,20 @@ const Home = () => {
 
     gsap.to("#circle1", {
       rotation: 360, // Rotate the circle 360 degrees
-      duration: 30, // Time for one full rotation
+      duration: 50, // Time for one full rotation
       repeat: -1, // Infinite looping
       ease: "linear", // Smooth and continuous rotation
     });
 
     gsap.to("#circle2", {
       rotation: 360, // Rotate the circle 360 degrees
-      duration: 25, // Time for one full rotation
+      duration: 30, // Time for one full rotation
       repeat: -1, // Infinite looping
       ease: "linear", // Smooth and continuous rotation
     });
 
     gsap.to("#blur-circle", {
-      duration: 10,
+      duration: 20,
       repeat: -1,
       ease: "linear",
       onUpdate: function () {
@@ -181,7 +181,7 @@ const Home = () => {
     });
 
     gsap.to("#blur-circle2", {
-      duration: 8,
+      duration: 18,
       repeat: -1,
       ease: "linear",
       opacity: 1,
@@ -201,43 +201,31 @@ const Home = () => {
           </div>
         </div>
         <div className="home grow flex flex-row justify-center items-center">
-        <img
-            className="absolute top-[33%] left-[8%] w-[656px] opacity-[0.6]"
-            id="circle1"
-            src="/orbit-circle.png"
-          />
-          <img
-            className="absolute bottom-[9%] left-[12%]"
-            id="circle2"
-            src="/orbit-circle.png"
-          />
-          <img             
-            className="absolute blur-[140px] bottom-[-27%] left-[49%] w-[1000px] z-0 opacity-[0]"
-            src="/green-circle.png"
-            id="blur-circle2"
-          />
-          <img             
-            className="absolute blur-[180px] bottom-[-2%] left-[6%] w-[1000px] z-0"
-            src="/green-circle.png"
-            id="blur-circle"
-          />
-          {/* <Image
-            className="absolute top-[134px] right-[376px]"
-            src="/star.png"
-            alt=""
-            width={80}
-            height={80}
-          /> */}
 
-          <div className="flex basis-1/2">
-            <img className="absolute top-[25%] left-[14%]" src="/robot-head.png" style={{width: '600px'}}  />
+          <div className="flex basis-1/2 relative h-[1000px]">
+            <img
+              className="absolute top-[16%] left-[-10%] w-[656px] opacity-[0.6]"
+              id="circle1"
+              src="/orbit-circle.png"
+            />
+            <img
+              className="absolute bottom-[29%] left-[-2%]"
+              id="circle2"
+              src="/orbit-circle.png"
+            />
+            <img             
+              className="absolute blur-[180px] bottom-[25%] left-[6%] w-[1000px] z-0"
+              src="/green-circle.png"
+              id="blur-circle"
+            />
+              <img className="absolute top-[15%] left-[-7%]" src="/robot-head.png" style={{width: '600px'}}  />
           </div>
 
           <div className="flex basis-1/2 flex-col items-center justify-center relative z-[1000]">
             <h2 className="text-6xl font-bold text-white text-center">
               <ReactTyped strings={[answer]} typeSpeed={50} startDelay={1000} />
             </h2>
-            <p className="m-0 p-0 my-6 font-light text-xl">
+            <p className="m-0 p-0 my-6 font-light text-xl text-center">
               {firstTime
                 ? "What would you like to call me?"
                 : "Generate your own AI Buddy! Make your life easier with BrainBuddy"}
@@ -280,6 +268,11 @@ const Home = () => {
                 </div>
               </div>
             </form>
+            <img             
+              className="absolute blur-[140px] bottom-[-27%] left-[49%] w-[1000px] z-0 opacity-[1]"
+              src="/green-circle.png"
+              id="blur-circle2"
+            />
           </div>
 
         </div>
