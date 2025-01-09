@@ -93,7 +93,7 @@ const Home = () => {
         setIsListening(false);
         fetchResponse({
           user_id: userId,
-          command: `Hello ${aiName}, ${commandRef.current}`,
+          command: `${aiName}, ${commandRef.current}`,
           ai_name: aiName,
         });
         console.log("Voice recognition ended.");
