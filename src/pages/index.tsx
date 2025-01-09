@@ -255,6 +255,7 @@ const Home = () => {
                   <button
                     className="px-4 py-3 bg-black text-white rounded-full flex gap-2 items-center justify-between"
                     type="submit"
+                    onClick={handleSubmit}
                     disabled={loading}
                   >
                     Submit
