@@ -47,7 +47,7 @@ const Home = () => {
     } else {
       await fetchResponse({
         user_id: userId,
-        command: `Hello ${aiName}, ${command}`,
+        command: `${aiName}, ${command}`,
         ai_name: aiName,
       });
     }
