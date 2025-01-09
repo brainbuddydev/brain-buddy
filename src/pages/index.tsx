@@ -152,9 +152,16 @@ const Home = () => {
     const centerY = 0; // Y center of the orbit
 
 
-    gsap.to("#circle", {
+    gsap.to("#circle1", {
       rotation: 360, // Rotate the circle 360 degrees
-      duration: 10, // Time for one full rotation
+      duration: 30, // Time for one full rotation
+      repeat: -1, // Infinite looping
+      ease: "linear", // Smooth and continuous rotation
+    });
+
+    gsap.to("#circle2", {
+      rotation: 360, // Rotate the circle 360 degrees
+      duration: 25, // Time for one full rotation
       repeat: -1, // Infinite looping
       ease: "linear", // Smooth and continuous rotation
     });
@@ -172,6 +179,14 @@ const Home = () => {
         gsap.set("#blur-circle", { x, y });
       },
     });
+
+    gsap.to("#blur-circle2", {
+      duration: 8,
+      repeat: -1,
+      ease: "linear",
+      opacity: 1,
+      yoyo: true
+    })
   }, []);
 
   return (
@@ -186,32 +201,39 @@ const Home = () => {
           </div>
         </div>
         <div className="home grow flex flex-row justify-center items-center">
-          <img
-            className="absolute bottom-[9%] left-[12%]"
-            id="circle"
+        <img
+            className="absolute top-[33%] left-[8%] w-[656px] opacity-[0.6]"
+            id="circle1"
             src="/orbit-circle.png"
           />
-          <Image
-            className="absolute blur-[60px] bottom-[-93px] left-[14px]"
+          <img
+            className="absolute bottom-[9%] left-[12%]"
+            id="circle2"
+            src="/orbit-circle.png"
+          />
+          <img             
+            className="absolute blur-[140px] bottom-[-27%] left-[49%] w-[1000px] z-0 opacity-[0]"
+            src="/green-circle.png"
+            id="blur-circle2"
+          />
+          <img             
+            className="absolute blur-[180px] bottom-[-2%] left-[6%] w-[1000px] z-0"
             src="/green-circle.png"
             id="blur-circle"
-            alt=""
-            width={618}
-            height={618}
           />
-          <Image
+          {/* <Image
             className="absolute top-[134px] right-[376px]"
             src="/star.png"
             alt=""
             width={80}
             height={80}
-          />
+          /> */}
 
           <div className="flex basis-1/2">
             <img className="absolute top-[25%] left-[14%]" src="/robot-head.png" style={{width: '600px'}}  />
           </div>
 
-          <div className="flex basis-1/2 flex-col items-center justify-center">
+          <div className="flex basis-1/2 flex-col items-center justify-center relative z-[1000]">
             <h2 className="text-6xl font-bold text-white text-center">
               <ReactTyped strings={[answer]} typeSpeed={50} startDelay={1000} />
             </h2>
