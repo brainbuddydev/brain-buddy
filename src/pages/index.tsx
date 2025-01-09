@@ -148,8 +148,8 @@ const Home = () => {
   useGSAP(() => {
 
     const radius = 400; // Radius of the orbit
-    const centerX = 20; // X center of the orbit
-    const centerY = -100; // Y center of the orbit
+    const centerX = 0; // X center of the orbit
+    const centerY = 0; // Y center of the orbit
 
 
     gsap.to("#circle", {
@@ -208,11 +208,11 @@ const Home = () => {
           />
 
           <div className="flex basis-1/2">
-            <img className="absolute top-[25%] left-[14%]" src="/robot-head.png" style={{width: '35%'}}  />
+            <img className="absolute top-[25%] left-[14%]" src="/robot-head.png" style={{width: '600px'}}  />
           </div>
 
           <div className="flex basis-1/2 flex-col items-center justify-center">
-            <h2 className="text-8xl font-bold text-white text-center">
+            <h2 className="text-6xl font-bold text-white text-center">
               <ReactTyped strings={[answer]} typeSpeed={50} startDelay={1000} />
             </h2>
             <p className="m-0 p-0 my-6 font-light text-xl">
