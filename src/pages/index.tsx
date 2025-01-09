@@ -152,41 +152,41 @@ const Home = () => {
     const centerY = 0; // Y center of the orbit
 
 
-    // gsap.to("#circle1", {
-    //   rotation: 360, // Rotate the circle 360 degrees
-    //   duration: 50, // Time for one full rotation
-    //   repeat: -1, // Infinite looping
-    //   ease: "linear", // Smooth and continuous rotation
-    // });
+    gsap.to("#circle1", {
+      rotation: 360, // Rotate the circle 360 degrees
+      duration: 50, // Time for one full rotation
+      repeat: -1, // Infinite looping
+      ease: "linear", // Smooth and continuous rotation
+    });
 
-    // gsap.to("#circle2", {
-    //   rotation: 360, // Rotate the circle 360 degrees
-    //   duration: 30, // Time for one full rotation
-    //   repeat: -1, // Infinite looping
-    //   ease: "linear", // Smooth and continuous rotation
-    // });
+    gsap.to("#circle2", {
+      rotation: 360, // Rotate the circle 360 degrees
+      duration: 30, // Time for one full rotation
+      repeat: -1, // Infinite looping
+      ease: "linear", // Smooth and continuous rotation
+    });
 
-    // gsap.to("#blur-circle", {
-    //   duration: 20,
-    //   repeat: -1,
-    //   ease: "linear",
-    //   onUpdate: function () {
-    //     const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
-    //     const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
-    //     const x = centerX + radius * Math.cos(angle);
-    //     const y = centerY + radius * Math.sin(angle);
+    gsap.to("#blur-circle", {
+      duration: 20,
+      repeat: -1,
+      ease: "linear",
+      onUpdate: function () {
+        const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
+        const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
 
-    //     gsap.set("#blur-circle", { x, y });
-    //   },
-    // });
+        gsap.set("#blur-circle", { x, y });
+      },
+    });
 
-    // gsap.to("#blur-circle2", {
-    //   duration: 18,
-    //   repeat: -1,
-    //   ease: "linear",
-    //   opacity: 1,
-    //   yoyo: true
-    // })
+    gsap.to("#blur-circle2", {
+      duration: 18,
+      repeat: -1,
+      ease: "linear",
+      opacity: 1,
+      yoyo: true
+    })
   }, []);
 
   return (
@@ -204,7 +204,7 @@ const Home = () => {
 
           <div className="flex basis-1/2 relative h-[720px]">
             <img
-              className="absolute top-[7%] left-[-10%] w-[656px] opacity-[0.6]"
+              className="absolute top-[10%] left-[-10%] w-[656px] opacity-[0.6]"
               id="circle1"
               src="/orbit-circle.png"
             />
@@ -219,6 +219,11 @@ const Home = () => {
               id="blur-circle"
             />
               <img className="absolute top-[-1%] left-[-2%]" src="/robot-head.png" style={{width: '600px'}}  />
+              <img             
+              className="absolute blur-[140px] bottom-[-14%] left-[103%] w-[1000px] z-0 opacity-[0] overflow-hidden"
+              src="/green-circle.png"
+              id="blur-circle2"
+              />
           </div>
 
           <div className="flex basis-1/2 flex-col items-center justify-center relative z-[1000]">
@@ -230,7 +235,7 @@ const Home = () => {
                 ? "What would you like to call me?"
                 : "Generate your own AI Buddy! Make your life easier with BrainBuddy"}
             </p>
-            <form onSubmit={handleSubmit} className="w-1/2">
+            <form className="w-1/2">
               <div className="mt-6 flex flex-col gap-8 w-full">
                 <input
                   type="text"
@@ -268,11 +273,6 @@ const Home = () => {
                 </div>
               </div>
             </form>
-            <img             
-              className="absolute blur-[140px] bottom-[-27%] left-[49%] w-[1000px] z-0 opacity-[1]"
-              src="/green-circle.png"
-              id="blur-circle2"
-            />
           </div>
 
         </div>
