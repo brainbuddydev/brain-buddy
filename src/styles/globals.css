@@ -165,11 +165,11 @@ body {
 h1 {
   font-size: 8vi;
   letter-spacing: -.15ch;
-  line-height: .35;
+  line-height: 1;
 }
 
 :root {
-  --hue: 280;
+  --hue: 200;
   --bg: oklch(35% .3 var(--hue));
   --text: oklch(85% .1 var(--hue));
   --shadow: oklch(25% .2 var(--hue));
