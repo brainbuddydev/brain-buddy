@@ -114,16 +114,24 @@ const Home = () => {
         const voices = speechSynthesis.getVoices();
         const femaleVoice = voices.find(
           (voice) =>
-            voice.name.includes("Female") ||
-            voice.name.includes("Google UK English Female")
+            voice.name.toLowerCase().includes("female") || // Check for "female" in the name
+            voice.name.toLowerCase().includes("woman") || // Check for "woman" in the name
+            voice.name.toLowerCase().includes("susan") || // Specific voice names (varies by browser/OS)
+            voice.name.toLowerCase().includes("victoria") ||
+            voice.name.toLowerCase().includes("karen") ||
+            voice.name.toLowerCase().includes("zoe") ||
+            voice.name.toLowerCase().includes("ava") // Add more names as needed
         );
-
+    
+        // If a female voice is found, set it
         if (femaleVoice) {
           utterance.voice = femaleVoice;
+        } else {
+          console.warn("No female voice found. Defaulting to the first available voice.");
         }
 
         utterance.lang = "en-US";
-        utterance.rate = 1.2;
+        utterance.rate = 0.9;
         utterance.pitch = 1.5;
         speechSynthesis.speak(utterance);
       };
