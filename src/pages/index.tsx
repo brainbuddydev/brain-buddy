@@ -152,45 +152,45 @@ const Home = () => {
     const centerY = 0; // Y center of the orbit
 
 
-    gsap.to("#circle1", {
-      rotation: 360, // Rotate the circle 360 degrees
-      duration: 50, // Time for one full rotation
-      repeat: -1, // Infinite looping
-      ease: "linear", // Smooth and continuous rotation
-    });
+    // gsap.to("#circle1", {
+    //   rotation: 360, // Rotate the circle 360 degrees
+    //   duration: 50, // Time for one full rotation
+    //   repeat: -1, // Infinite looping
+    //   ease: "linear", // Smooth and continuous rotation
+    // });
 
-    gsap.to("#circle2", {
-      rotation: 360, // Rotate the circle 360 degrees
-      duration: 30, // Time for one full rotation
-      repeat: -1, // Infinite looping
-      ease: "linear", // Smooth and continuous rotation
-    });
+    // gsap.to("#circle2", {
+    //   rotation: 360, // Rotate the circle 360 degrees
+    //   duration: 30, // Time for one full rotation
+    //   repeat: -1, // Infinite looping
+    //   ease: "linear", // Smooth and continuous rotation
+    // });
 
-    gsap.to("#blur-circle", {
-      duration: 20,
-      repeat: -1,
-      ease: "linear",
-      onUpdate: function () {
-        const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
-        const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
-        const x = centerX + radius * Math.cos(angle);
-        const y = centerY + radius * Math.sin(angle);
+    // gsap.to("#blur-circle", {
+    //   duration: 20,
+    //   repeat: -1,
+    //   ease: "linear",
+    //   onUpdate: function () {
+    //     const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
+    //     const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
+    //     const x = centerX + radius * Math.cos(angle);
+    //     const y = centerY + radius * Math.sin(angle);
 
-        gsap.set("#blur-circle", { x, y });
-      },
-    });
+    //     gsap.set("#blur-circle", { x, y });
+    //   },
+    // });
 
-    gsap.to("#blur-circle2", {
-      duration: 18,
-      repeat: -1,
-      ease: "linear",
-      opacity: 1,
-      yoyo: true
-    })
+    // gsap.to("#blur-circle2", {
+    //   duration: 18,
+    //   repeat: -1,
+    //   ease: "linear",
+    //   opacity: 1,
+    //   yoyo: true
+    // })
   }, []);
 
   return (
-    <div className="grainy-background">
+    <div className="grainy-background overflow-hidden">
       <div className="min-h-screen flex flex-col text-white max-w-[1200px] my-0 mx-auto">
         <div className="header p-[40px] flex items-center justify-between">
           <h1 className="text-4xl">BrainBuddy</h1>
@@ -202,14 +202,14 @@ const Home = () => {
         </div>
         <div className="home grow flex flex-row justify-center items-center">
 
-          <div className="flex basis-1/2 relative h-[1000px]">
+          <div className="flex basis-1/2 relative h-[720px]">
             <img
-              className="absolute top-[16%] left-[-10%] w-[656px] opacity-[0.6]"
+              className="absolute top-[7%] left-[-10%] w-[656px] opacity-[0.6]"
               id="circle1"
               src="/orbit-circle.png"
             />
             <img
-              className="absolute bottom-[29%] left-[-2%]"
+              className="absolute bottom-[14%] left-[-2%]"
               id="circle2"
               src="/orbit-circle.png"
             />
@@ -218,7 +218,7 @@ const Home = () => {
               src="/green-circle.png"
               id="blur-circle"
             />
-              <img className="absolute top-[15%] left-[-7%]" src="/robot-head.png" style={{width: '600px'}}  />
+              <img className="absolute top-[-1%] left-[-2%]" src="/robot-head.png" style={{width: '600px'}}  />
           </div>
 
           <div className="flex basis-1/2 flex-col items-center justify-center relative z-[1000]">
