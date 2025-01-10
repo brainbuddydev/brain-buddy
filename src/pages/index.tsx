@@ -294,7 +294,7 @@ const Home = () => {
                       height={32}
                     />
                   </button>
-                  {!firstTime && !isIOS() && (
+                  {!firstTime && (
                     <button
                       type="button"
                       className="px-4 py-3 bg-black text-white rounded-full flex gap-2 items-center justify-between"
