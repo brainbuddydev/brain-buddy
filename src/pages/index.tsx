@@ -47,12 +47,24 @@ const Home = () => {
     } else {
       await fetchResponse({
         user_id: userId,
-        command: `Hello ${aiName}, ${command}`,
+        command: `${aiName}, ${command}`,
         ai_name: aiName,
       });
     }
   };
 
+  const handleCopy = () => {
+    const textToCopy = "9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump";
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+  
   const handleStartListening = () => {
     if ("webkitSpeechRecognition" in window) {
       const recognition = new window.webkitSpeechRecognition();
@@ -93,7 +105,7 @@ const Home = () => {
         setIsListening(false);
         fetchResponse({
           user_id: userId,
-          command: `Hello ${aiName}, ${commandRef.current}`,
+          command: `${aiName}, ${commandRef.current}`,
           ai_name: aiName,
         });
         console.log("Voice recognition ended.");
@@ -114,16 +126,26 @@ const Home = () => {
         const voices = speechSynthesis.getVoices();
         const femaleVoice = voices.find(
           (voice) =>
-            voice.name.includes("Female") ||
-            voice.name.includes("Google UK English Female")
+            voice.name.toLowerCase().includes("female") || // Check for "female" in the name
+            voice.name.toLowerCase().includes("woman") || // Check for "woman" in the name
+            voice.name.toLowerCase().includes("susan") || // Specific voice names (varies by browser/OS)
+            voice.name.toLowerCase().includes("victoria") ||
+            voice.name.toLowerCase().includes("karen") ||
+            voice.name.toLowerCase().includes("zoe") ||
+            voice.name.toLowerCase().includes("ava") // Add more names as needed
         );
 
+        // If a female voice is found, set it
         if (femaleVoice) {
           utterance.voice = femaleVoice;
+        } else {
+          console.warn(
+            "No female voice found. Defaulting to the first available voice."
+          );
         }
 
         utterance.lang = "en-US";
-        utterance.rate = 1.2;
+        utterance.rate = 0.9;
         utterance.pitch = 1.5;
         speechSynthesis.speak(utterance);
       };
@@ -146,47 +168,45 @@ const Home = () => {
   }, [response]);
 
   useGSAP(() => {
-
     const radius = window.innerWidth <= 768 ? 80 : 100; // Radius of the orbit
     const centerX = 0; // X center of the orbit
     const centerY = 0; // Y center of the orbit
 
+    gsap.to("#circle1", {
+      rotation: 360, // Rotate the circle 360 degrees
+      duration: 50, // Time for one full rotation
+      repeat: -1, // Infinite looping
+      ease: "linear", // Smooth and continuous rotation
+    });
 
-    // gsap.to("#circle1", {
-    //   rotation: 360, // Rotate the circle 360 degrees
-    //   duration: 50, // Time for one full rotation
-    //   repeat: -1, // Infinite looping
-    //   ease: "linear", // Smooth and continuous rotation
-    // });
+    gsap.to("#circle2", {
+      rotation: 360, // Rotate the circle 360 degrees
+      duration: 30, // Time for one full rotation
+      repeat: -1, // Infinite looping
+      ease: "linear", // Smooth and continuous rotation
+    });
 
-    // gsap.to("#circle2", {
-    //   rotation: 360, // Rotate the circle 360 degrees
-    //   duration: 30, // Time for one full rotation
-    //   repeat: -1, // Infinite looping
-    //   ease: "linear", // Smooth and continuous rotation
-    // });
+    gsap.to("#blur-circle", {
+      duration: 20,
+      repeat: -1,
+      ease: "linear",
+      onUpdate: function () {
+        const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
+        const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
 
-    // gsap.to("#blur-circle", {
-    //   duration: 20,
-    //   repeat: -1,
-    //   ease: "linear",
-    //   onUpdate: function () {
-    //     const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
-    //     const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
-    //     const x = centerX + radius * Math.cos(angle);
-    //     const y = centerY + radius * Math.sin(angle);
+        gsap.set("#blur-circle", { x, y });
+      },
+    });
 
-    //     gsap.set("#blur-circle", { x, y });
-    //   },
-    // });
-
-    // gsap.to("#blur-circle2", {
-    //   duration: 18,
-    //   repeat: -1,
-    //   ease: "linear",
-    //   opacity: 1,
-    //   yoyo: true
-    // })
+    gsap.to("#blur-circle2", {
+      duration: 18,
+      repeat: -1,
+      ease: "linear",
+      opacity: 1,
+      yoyo: true,
+    });
   }, []);
 
   return (
@@ -223,7 +243,7 @@ const Home = () => {
               className="absolute md:blur-[140px] md:bottom-[-14%] md:left-[103%] bottom-[88%] left-[-17%] w-[1000px] z-0 opacity-[0] overflow-hidden"
               src="/green-circle.png"
               id="blur-circle2"
-              />
+            />
           </div>
 
           <div className="flex basis-1/2 flex-col items-center justify-center relative z-[1000]">
@@ -259,7 +279,12 @@ const Home = () => {
                     disabled={loading}
                   >
                     Submit
-                    <Image src="/left-arrow.png" alt="" width={32} height={32} />
+                    <Image
+                      src="/left-arrow.png"
+                      alt=""
+                      width={32}
+                      height={32}
+                    />
                   </button>
                   {!firstTime && (
                     <button
@@ -275,37 +300,35 @@ const Home = () => {
               </div>
             </form>
           </div>
-
         </div>
         <div className="about flex flex-col justify-center items-center">
           <h1 className="highlighted-text-shadow text-6xl text-center">Who is BrainBuddy?</h1>
           <div className="about-container">
             <div className="about-text">
               <div className="card3">
-                $BB is an AI Personal Assistant of the future. It’s more than just
-                a tool—it’s your digital companion, always ready to help you with
-                anything you need. From answering questions to managing tasks,
-                BrainBuddy is designed to think, adapt, and grow with you. With
-                BrainBuddy, the possibilities are endless. Customize its
-                personality, voice, and tone to create an assistant that feels
-                like a true reflection of you. As you interact, BrainBuddy learns
-                and evolves, becoming smarter and more intuitive with every
-                conversation. It’s not just about getting things done—it’s about
-                experiencing a seamless, intelligent connection that understands
-                you like no other. With BrainBuddy, the future of AI is here, and
-                it’s personal, smart, and always by your side.
+                $BB is an AI Personal Assistant of the future. It’s more than
+                just a tool—it’s your digital companion, always ready to help
+                you with anything you need. From answering questions to managing
+                tasks, BrainBuddy is designed to think, adapt, and grow with
+                you. With BrainBuddy, the possibilities are endless. Customize
+                its personality, voice, and tone to create an assistant that
+                feels like a true reflection of you. As you interact, BrainBuddy
+                learns and evolves, becoming smarter and more intuitive with
+                every conversation. It’s not just about getting things done—it’s
+                about experiencing a seamless, intelligent connection that
+                understands you like no other. With BrainBuddy, the future of AI
+                is here, and it’s personal, smart, and always by your side.
               </div>
             </div>
           </div>
           <div className="ca-address mb-[100px] md:mt-[0] mt-[40px]">
-            <button className="shiny-cta">
+            <button className="shiny-cta" onClick={handleCopy}>
               <span>CA : 9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump</span>
             </button>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 
