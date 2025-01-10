@@ -163,6 +163,17 @@ const Home = () => {
     }
   }, [response]);
 
+  const initSpeechSynthesis = () => {
+    if ("speechSynthesis" in window) {
+      // Preload voices on iOS
+      speechSynthesis.getVoices();
+    }
+  };
+
+  React.useEffect(() => {
+    initSpeechSynthesis();
+  }, []);
+
   useGSAP(() => {
     const radius = window.innerWidth <= 768 ? 80 : 100; // Radius of the orbit
     const centerX = 0; // X center of the orbit
