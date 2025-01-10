@@ -147,52 +147,52 @@ const Home = () => {
 
   useGSAP(() => {
 
-    const radius = 400; // Radius of the orbit
+    const radius = window.innerWidth <= 768 ? 80 : 100; // Radius of the orbit
     const centerX = 0; // X center of the orbit
     const centerY = 0; // Y center of the orbit
 
 
-    gsap.to("#circle1", {
-      rotation: 360, // Rotate the circle 360 degrees
-      duration: 50, // Time for one full rotation
-      repeat: -1, // Infinite looping
-      ease: "linear", // Smooth and continuous rotation
-    });
+    // gsap.to("#circle1", {
+    //   rotation: 360, // Rotate the circle 360 degrees
+    //   duration: 50, // Time for one full rotation
+    //   repeat: -1, // Infinite looping
+    //   ease: "linear", // Smooth and continuous rotation
+    // });
 
-    gsap.to("#circle2", {
-      rotation: 360, // Rotate the circle 360 degrees
-      duration: 30, // Time for one full rotation
-      repeat: -1, // Infinite looping
-      ease: "linear", // Smooth and continuous rotation
-    });
+    // gsap.to("#circle2", {
+    //   rotation: 360, // Rotate the circle 360 degrees
+    //   duration: 30, // Time for one full rotation
+    //   repeat: -1, // Infinite looping
+    //   ease: "linear", // Smooth and continuous rotation
+    // });
 
-    gsap.to("#blur-circle", {
-      duration: 20,
-      repeat: -1,
-      ease: "linear",
-      onUpdate: function () {
-        const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
-        const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
-        const x = centerX + radius * Math.cos(angle);
-        const y = centerY + radius * Math.sin(angle);
+    // gsap.to("#blur-circle", {
+    //   duration: 20,
+    //   repeat: -1,
+    //   ease: "linear",
+    //   onUpdate: function () {
+    //     const progress: string = gsap.getProperty(this, "progress").toString(); // Progress from 0 to 1
+    //     const angle = parseFloat(progress) * Math.PI * 2; // Convert progress to radians
+    //     const x = centerX + radius * Math.cos(angle);
+    //     const y = centerY + radius * Math.sin(angle);
 
-        gsap.set("#blur-circle", { x, y });
-      },
-    });
+    //     gsap.set("#blur-circle", { x, y });
+    //   },
+    // });
 
-    gsap.to("#blur-circle2", {
-      duration: 18,
-      repeat: -1,
-      ease: "linear",
-      opacity: 1,
-      yoyo: true
-    })
+    // gsap.to("#blur-circle2", {
+    //   duration: 18,
+    //   repeat: -1,
+    //   ease: "linear",
+    //   opacity: 1,
+    //   yoyo: true
+    // })
   }, []);
 
   return (
     <div className="grainy-background overflow-hidden">
       <div className="min-h-screen flex flex-col text-white max-w-[1200px] my-0 mx-auto">
-        <div className="header p-[40px] flex items-center justify-between">
+        <div className="header p-[40px] flex flex-col md:flex-row items-center justify-between">
           <h1 className="text-4xl">BrainBuddy</h1>
           <div className="flex gap-4">
             <h6>Twitter</h6>
@@ -200,27 +200,27 @@ const Home = () => {
             <h6>Dex Screener</h6>
           </div>
         </div>
-        <div className="home grow flex flex-row justify-center items-center">
+        <div className="home grow flex md:flex-row flex-col-reverse justify-center items-center">
 
-          <div className="flex basis-1/2 relative h-[720px]">
+          <div className="flex md:basis-1/2 relative md:h-[720px] h-[500px] w-full">
             <img
-              className="absolute top-[10%] left-[-10%] w-[656px] opacity-[0.6]"
+              className="absolute md:top-[10%] md:left-[-10%] md:w-[656px] w-[372px] top-[15%] left-[1%] opacity-[0.6]"
               id="circle1"
               src="/orbit-circle.png"
             />
             <img
-              className="absolute bottom-[14%] left-[-2%]"
+              className="absolute md:bottom-[14%] md:left-[-2%] md:w-[unset] w-[296px] bottom-[19%] left-[11%]"
               id="circle2"
               src="/orbit-circle.png"
             />
             <img             
-              className="absolute blur-[180px] bottom-[25%] left-[6%] w-[1000px] z-0"
+              className="absolute md:blur-[180px] blur-[40px] bottom-[25%] left-[6%] w-[1000px] z-0"
               src="/green-circle.png"
               id="blur-circle"
             />
-              <img className="absolute top-[-1%] left-[-2%]" src="/robot-head.png" style={{width: '600px'}}  />
+              <img className="absolute md:top-[-1%] md:left-[-2%] md:w-[600px] w-[330px] top-[7%] left-[7%]" src="/robot-head.png" />
               <img             
-              className="absolute blur-[140px] bottom-[-14%] left-[103%] w-[1000px] z-0 opacity-[0] overflow-hidden"
+              className="absolute md:blur-[140px] md:bottom-[-14%] md:left-[103%] bottom-[88%] left-[-17%] w-[1000px] z-0 opacity-[0] overflow-hidden"
               src="/green-circle.png"
               id="blur-circle2"
               />
@@ -235,7 +235,7 @@ const Home = () => {
                 ? "What would you like to call me?"
                 : "Generate your own AI Buddy! Make your life easier with BrainBuddy"}
             </p>
-            <form className="w-1/2">
+            <form className="md:w-1/2 w-full">
               <div className="mt-6 flex flex-col gap-8 w-full">
                 <input
                   type="text"
@@ -278,7 +278,7 @@ const Home = () => {
 
         </div>
         <div className="about flex flex-col justify-center items-center">
-          <h1 className="highlighted-text-shadow">Who is BrainBuddy?</h1>
+          <h1 className="highlighted-text-shadow text-6xl text-center">Who is BrainBuddy?</h1>
           <div className="about-container">
             <div className="about-text">
               <div className="card3">
@@ -297,7 +297,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="ca-address mb-[100px]">
+          <div className="ca-address mb-[100px] md:mt-[0] mt-[40px]">
             <button className="shiny-cta">
               <span>CA : 9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump</span>
             </button>

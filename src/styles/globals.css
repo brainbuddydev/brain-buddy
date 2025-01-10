@@ -375,3 +375,20 @@ h1 {
     scale: 1.2;
   }
 }
+
+
+@media only screen and (max-width: 600px) {
+  .about-container {
+    padding: 12px;
+  }
+  
+  .about-text > * { 
+    padding: 12px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .shiny-cta{
+    font-size: 10px;
+  }
+}
