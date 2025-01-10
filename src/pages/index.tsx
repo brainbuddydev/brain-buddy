@@ -53,6 +53,18 @@ const Home = () => {
     }
   };
 
+  const handleCopy = () => {
+    const textToCopy = "9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump";
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+  
   const handleStartListening = () => {
     if ("webkitSpeechRecognition" in window) {
       const recognition = new window.webkitSpeechRecognition();
@@ -122,12 +134,14 @@ const Home = () => {
             voice.name.toLowerCase().includes("zoe") ||
             voice.name.toLowerCase().includes("ava") // Add more names as needed
         );
-    
+
         // If a female voice is found, set it
         if (femaleVoice) {
           utterance.voice = femaleVoice;
         } else {
-          console.warn("No female voice found. Defaulting to the first available voice.");
+          console.warn(
+            "No female voice found. Defaulting to the first available voice."
+          );
         }
 
         utterance.lang = "en-US";
@@ -154,11 +168,9 @@ const Home = () => {
   }, [response]);
 
   useGSAP(() => {
-
     const radius = 400; // Radius of the orbit
     const centerX = 0; // X center of the orbit
     const centerY = 0; // Y center of the orbit
-
 
     gsap.to("#circle1", {
       rotation: 360, // Rotate the circle 360 degrees
@@ -193,8 +205,8 @@ const Home = () => {
       repeat: -1,
       ease: "linear",
       opacity: 1,
-      yoyo: true
-    })
+      yoyo: true,
+    });
   }, []);
 
   return (
@@ -209,7 +221,6 @@ const Home = () => {
           </div>
         </div>
         <div className="home grow flex flex-row justify-center items-center">
-
           <div className="flex basis-1/2 relative h-[720px]">
             <img
               className="absolute top-[10%] left-[-10%] w-[656px] opacity-[0.6]"
@@ -221,17 +232,21 @@ const Home = () => {
               id="circle2"
               src="/orbit-circle.png"
             />
-            <img             
+            <img
               className="absolute blur-[180px] bottom-[25%] left-[6%] w-[1000px] z-0"
               src="/green-circle.png"
               id="blur-circle"
             />
-              <img className="absolute top-[-1%] left-[-2%]" src="/robot-head.png" style={{width: '600px'}}  />
-              <img             
+            <img
+              className="absolute top-[-1%] left-[-2%]"
+              src="/robot-head.png"
+              style={{ width: "600px" }}
+            />
+            <img
               className="absolute blur-[140px] bottom-[-14%] left-[103%] w-[1000px] z-0 opacity-[0] overflow-hidden"
               src="/green-circle.png"
               id="blur-circle2"
-              />
+            />
           </div>
 
           <div className="flex basis-1/2 flex-col items-center justify-center relative z-[1000]">
@@ -267,7 +282,12 @@ const Home = () => {
                     disabled={loading}
                   >
                     Submit
-                    <Image src="/left-arrow.png" alt="" width={32} height={32} />
+                    <Image
+                      src="/left-arrow.png"
+                      alt=""
+                      width={32}
+                      height={32}
+                    />
                   </button>
                   {!firstTime && (
                     <button
@@ -283,37 +303,35 @@ const Home = () => {
               </div>
             </form>
           </div>
-
         </div>
         <div className="about flex flex-col justify-center items-center">
           <h1 className="highlighted-text-shadow">Who is BrainBuddy?</h1>
           <div className="about-container">
             <div className="about-text">
               <div className="card3">
-                $BB is an AI Personal Assistant of the future. It’s more than just
-                a tool—it’s your digital companion, always ready to help you with
-                anything you need. From answering questions to managing tasks,
-                BrainBuddy is designed to think, adapt, and grow with you. With
-                BrainBuddy, the possibilities are endless. Customize its
-                personality, voice, and tone to create an assistant that feels
-                like a true reflection of you. As you interact, BrainBuddy learns
-                and evolves, becoming smarter and more intuitive with every
-                conversation. It’s not just about getting things done—it’s about
-                experiencing a seamless, intelligent connection that understands
-                you like no other. With BrainBuddy, the future of AI is here, and
-                it’s personal, smart, and always by your side.
+                $BB is an AI Personal Assistant of the future. It’s more than
+                just a tool—it’s your digital companion, always ready to help
+                you with anything you need. From answering questions to managing
+                tasks, BrainBuddy is designed to think, adapt, and grow with
+                you. With BrainBuddy, the possibilities are endless. Customize
+                its personality, voice, and tone to create an assistant that
+                feels like a true reflection of you. As you interact, BrainBuddy
+                learns and evolves, becoming smarter and more intuitive with
+                every conversation. It’s not just about getting things done—it’s
+                about experiencing a seamless, intelligent connection that
+                understands you like no other. With BrainBuddy, the future of AI
+                is here, and it’s personal, smart, and always by your side.
               </div>
             </div>
           </div>
           <div className="ca-address mb-[100px]">
-            <button className="shiny-cta">
+            <button className="shiny-cta" onClick={handleCopy}>
               <span>CA : 9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump</span>
             </button>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 
