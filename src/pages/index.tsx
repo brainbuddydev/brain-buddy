@@ -60,11 +60,9 @@ const Home = () => {
       .then(() => {
         alert("Copied to clipboard!");
       })
-      .catch((err) => {
-        console.error("Failed to copy: ", err);
-      });
+      .catch((err) => {});
   };
-  
+
   const handleStartListening = () => {
     if ("webkitSpeechRecognition" in window) {
       const recognition = new window.webkitSpeechRecognition();
@@ -73,7 +71,6 @@ const Home = () => {
       recognition.continuous = false;
       recognition.onstart = () => {
         setIsListening(true);
-        console.log("Voice recognition started...");
       };
 
       recognition.onresult = (event: any) => {
@@ -93,11 +90,9 @@ const Home = () => {
         // Update the form with the current transcript
         commandRef.current = transcript;
         setCommand(transcript);
-        console.log("Voice detected:", transcript);
       };
 
       recognition.onerror = (error: any) => {
-        console.error("Speech recognition error:", error);
         setIsListening(false);
       };
 
@@ -108,12 +103,10 @@ const Home = () => {
           command: `${aiName}, ${commandRef.current}`,
           ai_name: aiName,
         });
-        console.log("Voice recognition ended.");
       };
 
       recognition.start();
     } else {
-      console.error("SpeechRecognition is not supported in this browser.");
     }
   };
 
@@ -139,9 +132,6 @@ const Home = () => {
         if (femaleVoice) {
           utterance.voice = femaleVoice;
         } else {
-          console.warn(
-            "No female voice found. Defaulting to the first available voice."
-          );
         }
 
         utterance.lang = "en-US";
@@ -156,8 +146,14 @@ const Home = () => {
         speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
       }
     } else {
-      console.error("Speech Synthesis API is not supported in this browser.");
     }
+  };
+
+  const isIOS = () => {
+    const userAgent = navigator.userAgent;
+    const platform = navigator.platform;
+    const isMac = platform === "MacIntel" && navigator.maxTouchPoints > 0; // Detect iPads running macOS
+    return /iPhone|iPad|iPod/i.test(userAgent) || isMac; // Include iPadOS in "isIOS"
   };
 
   useEffect(() => {
@@ -215,13 +211,22 @@ const Home = () => {
         <div className="header p-[40px] flex flex-col md:flex-row items-center justify-between">
           <h1 className="text-4xl">BrainBuddy</h1>
           <div className="flex gap-4">
-            <h6>Twitter</h6>
-            <h6>Telegram</h6>
+            <h6
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://x.com/brainbuddy_", "_blank")}
+            >
+              Twitter
+            </h6>
+            <h6
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://t.me/+dk8xn8yOJqszNzE9", "_blank")}
+            >
+              Telegram
+            </h6>
             <h6>Dex Screener</h6>
           </div>
         </div>
         <div className="home grow flex md:flex-row flex-col-reverse justify-center items-center">
-
           <div className="flex md:basis-1/2 relative md:h-[720px] h-[500px] w-full">
             <img
               className="absolute md:top-[10%] md:left-[-10%] md:w-[656px] w-[372px] top-[15%] left-[1%] opacity-[0.6]"
@@ -233,13 +238,16 @@ const Home = () => {
               id="circle2"
               src="/orbit-circle.png"
             />
-            <img             
+            <img
               className="absolute md:blur-[180px] blur-[40px] bottom-[25%] left-[6%] w-[1000px] z-0"
               src="/green-circle.png"
               id="blur-circle"
             />
-              <img className="absolute md:top-[-1%] md:left-[-2%] md:w-[600px] w-[330px] top-[7%] left-[7%]" src="/robot-head.png" />
-              <img             
+            <img
+              className="absolute md:top-[-1%] md:left-[-2%] md:w-[600px] w-[330px] top-[7%] left-[7%]"
+              src="/robot-head.png"
+            />
+            <img
               className="absolute md:blur-[140px] md:bottom-[-14%] md:left-[103%] bottom-[88%] left-[-17%] w-[1000px] z-0 opacity-[0] overflow-hidden"
               src="/green-circle.png"
               id="blur-circle2"
@@ -286,7 +294,7 @@ const Home = () => {
                       height={32}
                     />
                   </button>
-                  {!firstTime && (
+                  {!firstTime && !isIOS() && (
                     <button
                       type="button"
                       className="px-4 py-3 bg-black text-white rounded-full flex gap-2 items-center justify-between"
@@ -302,7 +310,9 @@ const Home = () => {
           </div>
         </div>
         <div className="about flex flex-col justify-center items-center">
-          <h1 className="highlighted-text-shadow text-6xl text-center">Who is BrainBuddy?</h1>
+          <h1 className="highlighted-text-shadow text-6xl text-center">
+            Who is BrainBuddy?
+          </h1>
           <div className="about-container">
             <div className="about-text">
               <div className="card3">
