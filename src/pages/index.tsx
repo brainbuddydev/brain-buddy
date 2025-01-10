@@ -28,6 +28,7 @@ const Home = () => {
         setFirstTime(false);
         const existAnswer = `Hello! My name is ${existAiName}`;
         setAnswer(existAnswer);
+        initSpeechSynthesis();
       }
     }
   }, []);
@@ -169,10 +170,6 @@ const Home = () => {
       speechSynthesis.getVoices();
     }
   };
-
-  React.useEffect(() => {
-    initSpeechSynthesis();
-  }, []);
 
   useGSAP(() => {
     const radius = window.innerWidth <= 768 ? 80 : 100; // Radius of the orbit
