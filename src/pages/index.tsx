@@ -55,7 +55,7 @@ const Home = () => {
   };
 
   const handleCopy = () => {
-    const textToCopy = "9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump";
+    const textToCopy = "GQm3JhE6wgj3T343asHNwxZ3WQ2VutAWeSizLD4Lpump";
     navigator.clipboard
       .writeText(textToCopy)
       .then(() => {
@@ -341,7 +341,7 @@ const Home = () => {
           </div>
           <div className="ca-address mb-[100px] md:mt-[0] mt-[40px]">
             <button className="shiny-cta" onClick={handleCopy}>
-              <span>CA : 9geNBCEuk1iUqMM9ru23a8yhNVCVkN5BN5NNvrdjpump</span>
+              <span>CA : GQm3JhE6wgj3T343asHNwxZ3WQ2VutAWeSizLD4Lpump</span>
             </button>
           </div>
         </div>
